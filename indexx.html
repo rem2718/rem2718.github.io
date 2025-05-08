@@ -1,0 +1,128 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Puzzle Box</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Pixelify+Sans:wght@400..700&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Ubuntu+Mono&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+    <style>
+        body {
+            font-family: 'Ubuntu Mono', monospace;
+            background-color: rgb(56, 62, 79);
+        }
+
+        .title {
+            background-image: url('images/lcd.png');
+            background-size: contain;
+            background-repeat: no-repeat;
+            color: white;
+            padding: 50px;
+            background-position: center;
+            font-family: "Pixelify Sans", sans-serif;
+        }
+
+        .containerr {
+            background-color: #fff;
+            padding: 20px;
+            margin-left: 60px;
+            margin-right: 60px;
+            border-radius: 8px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+        }
+
+        .input-field {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+
+        input[type="text"] {
+            max-width: 100px;
+            padding: 8px;
+            border: 2px solid #ccc;
+            border-radius: 4px;
+            font-size: 1rem;
+            outline: none;
+            transition: border-color 0.3s;
+        }
+
+        input[type="text"].error {
+            border-color: red;
+        }
+
+        button {
+            padding: 8px 16px;
+            background-color: #28a745;
+            color: white;
+            border: none;
+            border-radius: 4px;
+            cursor: pointer;
+            margin-left: 20px;
+        }
+
+        button:hover {
+            background-color: #218838;
+        }
+    </style>
+</head>
+
+<body>
+    <div class="container mt-5 p-4">
+        <h2 class="mb-4 text-center text-light title mb-5">
+            <b> HOW TO PLAY </b>
+        </h2>
+        <ol class="list-group list-group-numbered">
+            <li class="list-group-item">1. This puzzle box contains 3 questions. Try to solve them all to win the
+                prize!!!
+            </li>
+            <li class="list-group-item">2. Press the switch on the right side of the puzzle box to start it.</li>
+            <li class="list-group-item">3. Click on <b>"#"</b> on the keypad to continue or to submit an answer.</li>
+            <li class="list-group-item">4. Each question has 2 hints. You can access the hints by clicking on <b>"*"</b>
+                on
+                the keypad.</li>
+            <li class="list-group-item">5. Don't use hints unless you're so desperate ;-;</li>
+            <li class="list-group-item">6. To restart the puzzle, turn it off and on again.</li>
+            <li class="list-group-item">7. Don't play with anything on the box; just enter answers using the keypad.
+            </li>
+            <li class="list-group-item">8. Feel free to use Google or ChatGPT to solve the questions—you might need them
+                ;) </li>
+            <li class="list-group-item  text-center big"> <b>GOOD LUCK :)</b> </li>
+
+        </ol>
+
+        <div class="row mb-4 p-4">
+            <div class="col-md-12">
+                <div class="bg-light" style="padding: 20px; border-radius: 10px;">
+                    <div class="text-center">Enter the 4 digits printed on the prize:</div>
+                    <div class="input-field mt-2">
+                        <input type="text" class="form-control" id="userInput" maxlength="4" placeholder="Enter code" />
+                        <button onclick="checkCode()">Submit</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+
+    <script>
+        function checkCode() {
+            var userInput = document.getElementById('userInput');
+            var answer = '2301';
+
+            if (userInput.value === answer) {
+                window.location.href = 'about.html';
+            } else {
+                userInput.classList.add('error');
+            }
+        }
+    </script>
+    <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.5.2/dist/js/bootstrap.bundle.min.js"></script>
+</body>
+
+</html>
