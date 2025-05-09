@@ -19,6 +19,12 @@ window.onload = function() {
 
     })
 
+    document.querySelector('#start2').addEventListener('click', function() {
+        location.reload();
+  
+      })
+  
+
     document.querySelector('#startconsoledebug').addEventListener('click', function() {
       debuglog = true
     })
