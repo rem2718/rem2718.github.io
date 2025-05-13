@@ -1,0 +1,12 @@
+body {
+  font-family:  "Pixelify Sans", sans-serif;
+  font-weight: bold;
+}
+
+.keypadwrapper { 
+    width: fit-content;
+	.numberinput { display: inline-block; height: 10px; width: 10px; border: 1px solid #222222; font-size: 1.5em; }
+
+}
+
+.nocircle { width: auto !important; border: none !important; height: auto !important; }

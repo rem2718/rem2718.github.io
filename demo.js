@@ -1,52 +1,53 @@
 var audioContext = null;
 var meter = null;
 var canvasContext = null;
-var WIDTH=500;
-var HEIGHT=50;
+var WIDTH = 500;
+var HEIGHT = 50;
 var rafID = null;
 
 var debuglog = false
 
-window.onload = function() {
+window.onload = function () {
     window.AudioContext = window.AudioContext || window.webkitAudioContext;
     audioContext = new AudioContext();
 
-    document.querySelector('#start').addEventListener('click', function() {
+    document.querySelector('#start').addEventListener('click', function () {
 
-      audioContext.resume().then( () => {
-        console.log('User interacted with the page. Playback resumed successfully')
-      })
+        audioContext.resume().then(() => {
+            console.log('User interacted with the page. Playback resumed successfully')
+        })
 
     })
 
-    document.querySelector('#start2').addEventListener('click', function() {
-        location.reload();
-  
-      })
-  
-
-    document.querySelector('#startconsoledebug').addEventListener('click', function() {
-      debuglog = true
+    document.querySelector('#start2').addEventListener('click', function () {
+        audioContext.close().then(() => {
+            location.reload();
+        });
     })
 
-    document.querySelector('#stopconsoledebug').addEventListener( 'click', () =>  {
-      debuglog = false
+
+    document.querySelector('#startconsoledebug').addEventListener('click', function () {
+        debuglog = true
+    })
+
+    document.querySelector('#stopconsoledebug').addEventListener('click', () => {
+        debuglog = false
     })
 
     try {
         navigator.mediaDevices.getUserMedia(
-        {
-            'audio': {
-                'mandatory': {
-                    'googEchoCancellation': 'false',
-                    'googAutoGainControl': 'false',
-                    'googNoiseSuppression': 'false',
-                    'googHighpassFilter': 'false'
+            {
+                'audio': {
+                    'mandatory': {
+                        'googEchoCancellation': 'false',
+                        'googAutoGainControl': 'false',
+                        'googNoiseSuppression': 'false',
+                        'googHighpassFilter': 'false'
+                    },
+                    'optional': []
                 },
-                'optional': []
-            },
-        }).then(audioStream)
-        .catch(didntGetStream);
+            }).then(audioStream)
+            .catch(didntGetStream);
     } catch (e) {
         alert('getUserMedia threw exception :' + e);
     }
@@ -59,9 +60,9 @@ function didntGetStream() {
 }
 
 
-function drawLoop( time ) {
+function drawLoop(time) {
     // clear the background
-    canvasContext.clearRect(0,0,WIDTH,HEIGHT);
+    canvasContext.clearRect(0, 0, WIDTH, HEIGHT);
 
     // check if we're currently clipping
     if (meter.checkClipping())
@@ -70,10 +71,10 @@ function drawLoop( time ) {
         canvasContext.fillStyle = 'green';
 
     // draw a bar based on the current volume
-    canvasContext.fillRect(0, 0, meter.volume*WIDTH*1.4, HEIGHT);
+    canvasContext.fillRect(0, 0, meter.volume * WIDTH * 1.4, HEIGHT);
 
     // set up the next visual callback
-    rafID = window.requestAnimationFrame( drawLoop );
+    rafID = window.requestAnimationFrame(drawLoop);
 }
 
 
@@ -85,3 +86,10 @@ setInterval(() => {
     i = (i + 1) % frames.length;
     face.textContent = frames[i];
 }, 500);
+
+window.addEventListener('DOMContentLoaded', () => {
+    setTimeout(() => {
+        const myModal = new bootstrap.Modal(document.getElementById('noteModal'));
+        myModal.show();
+    }, 500);
+});

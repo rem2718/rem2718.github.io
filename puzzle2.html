@@ -18,10 +18,10 @@
 <body>
     <div id="fullscreenWarning"
         class="container-fluid d-flex flex-column justify-content-center align-items-center bg-secondary bg-opacity-50 z-3 vh-100 text-center">
-        <h1 class="mb-3">WHAT DO YOU SEE IN THE PICTURE BELOW?</h1>
+        <h1>WHAT DO YOU SEE IN THE PICTURE BELOW?</h1>
         <div>IF IT IS HARD TO GUESS YOU CAN INCREASE THE QUALITY <span class="h2 text-danger">GRADUALLY</span></div>
-        <div class="container mt-3">
-            <div class="dropdown">
+        <div class="container mt-4 d-flex justify-content-center">
+            <div class="dropdown mx-3">
                 <button class="btn btn-primary dropdown-toggle" type="button" data-bs-toggle="dropdown"
                     aria-expanded="false">
                     - QUALITY -
@@ -33,11 +33,26 @@
                     <li><a class="dropdown-item" href="#" onclick="showImage('images/1080p.png')">1080p</a></li>
                 </ul>
             </div>
+            <input type="text" class="form-control w-25" id="moonInput" placeholder="Enter text">
+            <button class="btn btn-success mx-3" type="button" onclick="checkInput()">ENTER</button>
         </div>
-
         <img id="displayedImage" src="images/144p.png" alt="Selected Quality" class="img-fluid img-thumbnail mt-3"
             style="width: 350px; height: 350px; object-fit: cover;">
 
+        <div class="modal fade" id="feedbackModal" tabindex="-1" aria-labelledby="feedbackModalLabel"
+            aria-hidden="true">
+            <div class="modal-dialog">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                    </div>
+                    <div class="modal-body h3" id="modalMessage"></div>
+                    <div class="modal-footer" id="modalFooter"><a id="next" class="btn btn-primary mx-3"
+                            href="puzzle3.html" style="display: none;">NEXT</a>
+                    </div>
+                </div>
+            </div>
+        </div>
     </div>
 
 

@@ -74,7 +74,7 @@ td, th {
   position: absolute;
   width: 250px;
   height: 200px;
-  top: 50%;
+  top: 60%;
   left: 50%;
   margin-top: -70px;
   margin-left: -125px;
@@ -254,4 +254,11 @@ td, th {
 
 .text-center {
   text-align: center;
+}
+
+.modal-body.red {
+    color: red;
+}
+.modal-body.green {
+    color: green;
 }
