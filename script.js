@@ -1,7 +1,13 @@
 const audio = new Audio('images/alarm.mp3');
 audio.loop = true;
-audio.play();
- 
+var played = false;
+function alarmPlay() {
+    if (!played) {
+        audio.play();
+        played = true;
+    }
+}
+
 const audio2 = new Audio('images/hbd.mp3');
 audio2.loop = true;
 
@@ -12,7 +18,7 @@ window.addEventListener('DOMContentLoaded', () => {
         myModal.show();
         audio.pause();
         audio2.play();
-    }, 5000);
+    }, 7000);
 });
 
 const face = document.getElementById('dancing-face');
