@@ -2,6 +2,14 @@ const audio = new Audio('images/hbd.mp3');
 audio.loop = true;
 audio.play();
 
+function playSongOnce() {
+      audio.play();
+      document.body.removeEventListener('touchstart', playSongOnce);
+    }
+
+document.body.addEventListener('touchstart', playSongOnce);
+document.body.addEventListener('click', playSongOnce);
+
 var pass = '    ';
 var correct = '2184';
 var hints = [
