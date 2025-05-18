@@ -3,9 +3,10 @@ audio.loop = true;
 audio.play();
 
 function playSongOnce() {
-      audio.play();
-      document.body.removeEventListener('touchstart', playSongOnce);
-    }
+    audio.play();
+    document.body.removeEventListener('touchstart', playSongOnce);
+    document.body.removeEventListener('click', playSongOnce);
+}
 
 document.body.addEventListener('touchstart', playSongOnce);
 document.body.addEventListener('click', playSongOnce);

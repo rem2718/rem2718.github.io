@@ -1,12 +1,15 @@
 const audio = new Audio('images/alarm.mp3');
 audio.loop = true;
-var played = false;
-function alarmPlay() {
-    if (!played) {
-        audio.play();
-        played = true;
-    }
+audio.play();
+
+function playSongOnce() {
+    audio.play();
+    document.body.removeEventListener('touchstart', playSongOnce);
+    document.body.removeEventListener('click', playSongOnce);
 }
+
+document.body.addEventListener('touchstart', playSongOnce);
+document.body.addEventListener('click', playSongOnce);
 
 const audio2 = new Audio('images/hbd.mp3');
 audio2.loop = true;
