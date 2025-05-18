@@ -1,9 +1,13 @@
+const audio = new Audio('images/hbd.mp3');
+audio.loop = true;
+audio.play();
+
 var pass = '    ';
 var correct = '2184';
 var hints = [
     'MUSIC AND LITERATURE ARENT WHAT SHAPED OUR BOND?',
+    'THE BAND THAT SOUNDTRACK OUR RELATIONSHIP',
     'BIG BROTHER IS ALWAYS WATCHING BUT MAYBE JUST 2 DIGITS AWAY',
-    'THE BAND THAT SOUNDTRACKED OUR RELATIONSHIP',
     'ENOUGH HINTS SORRY :('
 ];
 var i = 0;

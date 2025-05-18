@@ -1,3 +1,7 @@
+const audio = new Audio('images/hbd.mp3');
+audio.loop = true;
+audio.play();
+
 function launchBalloons(count = 10) {
     const container = document.getElementById('balloon-container');
     container.innerHTML = '';
