@@ -1,0 +1,111 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>Hidden Letter</title>
+
+<style>
+body {
+    margin: 0;
+    height: 100vh;
+    background: #fff0f3;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    padding-top: 15vh;
+    overflow: hidden;
+    font-family: system-ui, sans-serif;
+    position: relative;
+}
+
+/* Question box */
+.container-box {
+    background: white;
+    border-radius: 20px;
+    padding: 20px;
+    box-shadow: 0 10px 25px rgba(0,0,0,0.05);
+    text-align: center;
+    margin-bottom: 30px;
+    width: 80%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    z-index: 5;
+}
+
+.container-box h3 {
+    margin: 0;
+    line-height: 1.7;
+}
+
+/* ===== FALLING LETTERS ===== */
+.letter {
+    position: absolute;
+    top: -60px;
+    width: 40px;
+    height: 40px;
+    background: url('letter.png') no-repeat center center;
+    background-size: contain;
+    animation: fallSway linear infinite;
+    pointer-events: none;
+    filter: drop-shadow(0 4px 6px rgba(255, 0, 80, 0.2));
+}
+
+/* Falling + swaying animation */
+@keyframes fallSway {
+    0% {
+        transform: translateY(-60px) rotate(0deg);
+        opacity: 0;
+    }
+    10% {
+        opacity: 1;
+    }
+    25% {
+        transform: translateY(25vh) rotate(12deg);
+    }
+    50% {
+        transform: translateY(50vh) rotate(-12deg);
+    }
+    75% {
+        transform: translateY(80vh) rotate(12deg);
+    }
+    100% {
+        transform: translateY(110vh) rotate(-12deg);
+        opacity: 0.4;
+    }
+}
+</style>
+</head>
+
+<body>
+
+<div class="container-box">
+    <h3>
+        PSST... THERES A LOVE LETTER WITH YOUR NAME ON IT 💌<br><br>
+        RESTING IN A PLACE THAT HAS WITNESSED OUR LOVE 🤍<br><br>
+        TUCKED INSIDE A WHITE BAG 🛍️<br><br>
+        WAITING QUIETLY FOR YOU TO FIND IT! 👀✨
+    </h3>
+</div>
+
+<!-- JavaScript creates MANY falling love letters -->
+<script>
+const LETTER_COUNT = 40; 
+
+for (let i = 0; i < LETTER_COUNT; i++) {
+    const letter = document.createElement("div");
+    letter.className = "letter";
+
+    letter.style.left = Math.random() * 100 + "vw";
+    letter.style.animationDuration = (2 + Math.random() * 6) + "s";
+    letter.style.animationDelay = Math.random() * 6 + "s";
+    letter.style.opacity = 0.6 + Math.random() * 0.4;
+    letter.style.transform = `scale(${0.6 + Math.random() * 0.6})`;
+
+    document.body.appendChild(letter);
+}
+</script>
+
+</body>
+</html>

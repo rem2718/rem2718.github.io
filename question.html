@@ -1,0 +1,207 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>A Quick Question...</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Ubuntu+Mono:ital,wght@0,400;0,700;1,400;1,700&display=swap" rel="stylesheet">
+    <style>
+        body {
+            height: 100vh;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: flex-start; /* Changed to start to allow scrolling if button gets huge */
+            padding-top: 15vh;
+            background-color: #fff0f3;
+            font-family: 'Ubuntu Mono', monospace;
+            font-weight: 700;
+            font-style: normal;
+            overflow-x: hidden;
+        }
+        .container-box {
+            background: white;
+            border-radius: 20px;
+            box-shadow: 0 10px 25px rgba(0,0,0,0.05);
+            text-align: center;
+            height: 170px;
+            margin-bottom: 30px;
+            width: 95%;
+             display: flex;
+            align-items: center;     
+            justify-content: center; 
+        }
+     
+        .btn-custom {
+            border: none;
+            width: 200px;
+            height: 60px;
+            border-radius: 15px;
+            font-weight: bold;
+            font-size: 1.2rem;
+            transition: all 0.3s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+            color: white;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.1);
+        }
+
+        /* Blue Yes Button */
+        #yesBtn {
+            background-color: #f5adef; 
+            position: relative;
+            margin-top: 10px;
+            animation: pulse 2s infinite;
+            /* z-index: 5; */
+        }
+        #yesBtn:hover {
+            background-color: #f594ed;
+            transform: scale(1.05);
+        }
+
+        #noBtn {
+            background-color: #91a1f0; 
+            position: relative;
+            margin-top: 10px;
+        }
+        #noBtn:hover {
+            background-color: #8093f0;
+            transform: scale(1.05);
+        }
+
+        #contBtn {
+            background-color: #91f0cf; 
+            margin-top: 20px;
+        }
+
+        #contBtn:hover {
+            background-color: #5bb897;
+            transform: scale(1.05);
+        }
+
+        .button-wrapper {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            width: 100%;
+        }
+
+        @keyframes pulse {
+            0% {
+                box-shadow: 0 0 0 0 rgba(232, 145, 240, 0.6);
+            }
+            70% {
+                box-shadow: 0 0 0 18px rgba(145, 161, 240, 0);
+            }
+            100% {
+                box-shadow: 0 0 0 0 rgba(145, 161, 240, 0);
+            }
+        }
+
+        .pop-in {
+            animation: popIn 0.4s ease forwards;
+        }
+
+        @keyframes popIn {
+            from { transform: scale(0.8); opacity: 0; }
+            to { transform: scale(1); opacity: 1; }
+        }
+
+    </style>
+</head>
+<body>
+
+    <div class="container-box">
+        <b><h1 id="question">Would you go out with me on a friends date?</b></h1>
+        <!-- <b><h1 id="question">BB, WOULD YOU BE MY VALENTINE❤️?</b></h1> -->
+    </div>
+
+    <div class="button-wrapper">
+        <button id="yesBtn" class="btn-custom"><b>YES</b></button>
+        <button id="noBtn" class="btn-custom"><b></b>NO</b></button>
+    </div>
+    <div class="button-wrapper">
+        <button id="contBtn" class="btn-custom" style="display: none;"><b>➤</b></button>
+    </div>
+    <script src="https://cdn.jsdelivr.net/npm/canvas-confetti@1.6.0/dist/confetti.browser.min.js"></script>
+
+    <script>
+        const yesBtn = document.getElementById('yesBtn');
+        const noBtn = document.getElementById('noBtn');
+        const contBtn = document.getElementById('contBtn');
+        const question = document.getElementById('question');
+
+        let scale = 1;
+        let moveDistance = 0;
+        let sureCounter = 0;
+        let isSurePhase = false;
+
+        // NO button logic
+        noBtn.addEventListener('click', () => {
+            if (isSurePhase) return;
+
+            scale += 0.3;
+            yesBtn.style.transform = `scale(${scale})`;
+
+            moveDistance += 13;
+            yesBtn.style.marginTop = `${moveDistance}px`;
+            noBtn.style.marginTop = `${moveDistance}px`;
+        });
+
+    // YES button logic
+        yesBtn.addEventListener('click', () => {
+
+            if (!isSurePhase) {
+                sureCounter++;
+
+                if (sureCounter === 1) {
+                    question.innerHTML = "<b>ARE YOU SURE?</b>";
+                } else if (sureCounter === 2) {
+                    question.innerHTML = "<b>ARE YOU REALLY SURE?</b>";
+                } else if (sureCounter === 3) {
+                    question.innerHTML = "<b>ARE YOU REALLY REALLY SURE?</b>";
+                } else {
+                    // Enter final phase
+                    isSurePhase = true;
+                    question.innerHTML = "<b>ARE YOU REALLY REALLY REALLY SURE?</b>";
+                }
+
+                return;
+            }
+
+            // FINAL YES
+            question.innerHTML = `
+                <b>
+                    LOOK AT YOU PRESSING YES AGAIN!<br>
+                    THATS ALL THE CONFIRMATION I NEED 😉
+                </b>
+            `;
+            yesBtn.style.display = 'none';
+            noBtn.style.display = 'none';
+            contBtn.style.display = 'block';
+            contBtn.classList.add('pop-in');    
+            
+            // Confetti 🎉
+            const count = 200;
+            const defaults = { origin: { y: 0.7 } };
+
+            function fire(particleRatio, opts) {
+                confetti(Object.assign({}, defaults, opts, {
+                    particleCount: Math.floor(count * particleRatio)
+                }));
+            }
+
+            fire(0.75, { spread: 26, startVelocity: 55 });
+            fire(0.2, { spread: 60 });
+            fire(0.35, { spread: 100, decay: 0.91, scalar: 0.8 });
+            fire(0.1, { spread: 120, startVelocity: 25, decay: 0.92, scalar: 1.2 });
+            fire(0.1, { spread: 120, startVelocity: 45 });
+            
+        });
+        contBtn.addEventListener('click', () => {
+            window.location.href = "letter.html";
+        });
+    </script>
+</body>
+</html>
